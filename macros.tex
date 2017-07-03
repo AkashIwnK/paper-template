@@ -3,6 +3,7 @@
 \WarningFilter*{caption}{Unsupported document class}
 %%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{times}
+\renewcommand{\ttdefault}{pxtt}
 \usepackage{datetime}
 %% For urls
 \usepackage[hyphens]{url}
@@ -40,6 +41,7 @@
 % for math macro and numbers
 \usepackage{fp}
 \usepackage{siunitx}
+\usepackage{xstring}
 %%%%%%%%%%%%%%%%%%%%%%% END of Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % use \num{123456} -> 123,456
@@ -172,6 +174,59 @@
   \textup{\uppercase\expandafter{\romannumeral#1}}%
 }
 \SetKwProg{Fn}{Function}{}{}
+
+% sema
+\newcommand{\shl}{\ \cc{<}\cc{<}\ }
+\newcommand{\shr}{\ \cc{>}\cc{>}\ }
+\newcommand{\x}{$\times$\xspace}
+
+% include macros
+\newcommand{\includepdf}[1]{
+  \includegraphics[width=\columnwidth]{#1}
+}
+\newcommand{\includeplot}[1]{
+  \resizebox{\columnwidth}{!}{\input{#1}}
+}
+
+% list
+\newcommand{\squishlist}{
+\begin{itemize}[noitemsep,nolistsep]
+  \setlength{\itemsep}{-0pt}
+}
+\newcommand{\squishend}{
+  \end{itemize}
+}
+%%
+%% NOTE.
+%%  to use circled number in caption, use
+%%   (e.g., \protect\C{1})
+%%
+\usepackage{tikz}
+\newcommand*\C[1]{%
+\begin{tikzpicture}[baseline=(C.base)]
+\node[draw,circle,inner sep=0.2pt](C) {#1};
+\end{tikzpicture}}
+
+\newcommand*\BC[1]{%
+\begin{tikzpicture}[baseline=(C.base)]
+\node[draw,circle,fill=black,inner sep=0.2pt](C) {\textcolor{white}{#1}};
+\end{tikzpicture}
+}
+
+\newcommand{\PP}[1]{
+\vspace{2px}
+\noindent{\bf \IfEndWith{#1}{.}{#1}{#1.}}
+}
+
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand{\V}{\checkmark}
+\newcommand{\X}{{\footnotesize $\times$}\xspace}
+\renewcommand{\O}{\phantom{0}}
+
+\newcommand{\etal}{\textit{et al}.\xspace}
+\newcommand{\ie}{\textit{i}.\textit{e}.}
+\newcommand{\eg}{\textit{e}.\textit{g}.}
+\newcommand{\URL}{\url}
 
 %%%%%%%%%%%%%%%% Custom Macros For Paper  %%%%%%%%%%%%%%%%
 
