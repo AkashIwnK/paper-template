@@ -1,20 +1,14 @@
 \documentclass[11pt,letterpaper,twocolumn]{article}
-
 % conference specific style
 \usepackage[11pt,nocopyright]{sigmin}
 \usepackage[square,comma,numbers,sort&compress]{natbib}
-
 % common packages
 \include{macros}
 
-\input{rev}
-
 \begin{document}
 
-\input{hdr}
-\date{}
+\title{\Sys: TITLE HERE}
 \maketitle
-
 \input{abstract}
 \input{intro}
 \input{overview}
@@ -24,10 +18,9 @@
 \input{relwk}
 \input{conclusion}
 \input{ack}
-
 \balance
 \bibliographystyle{abbrvnat}
 \footnotesize
 \setlength{\bibsep}{3pt}
-\bibliography{p,conf}
+\bibliography{bib}
 \end{document}

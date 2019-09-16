@@ -2,9 +2,6 @@
 \usepackage{silence}
 \WarningFilter*{caption}{Unsupported document class}
 %%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{times}
-\renewcommand{\ttdefault}{pxtt}
-\usepackage{datetime}
 %% For urls
 \usepackage[hyphens]{url}
 \usepackage[breaklinks,colorlinks]{hyperref}
@@ -20,14 +17,14 @@
 \usepackage{epic}
 \usepackage{epsf}
 \usepackage{listings}
-\usepackage{makecell}% http://ctan.org/pkg/makecell   
+\usepackage{makecell}% http://ctan.org/pkg/makecell
 \usepackage{multirow}
 \usepackage{textcomp}
-\usepackage{xspace}    % sticks a sane space after a command                
+\usepackage{xspace}    % sticks a sane space after a command
 \usepackage{latexsym}
 \usepackage[labelfont=bf,font=small,skip=5pt]{caption}
 \usepackage{afterpage}
-\usepackage{amstext}   % provides \text{} command in math mode              
+\usepackage{amstext}   % provides \text{} command in math mode
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{tabularx}
@@ -35,7 +32,6 @@
 \usepackage{longtable}
 \usepackage{rotating}
 \usepackage{algorithm2e}
-\usepackage{pgfplots}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 % for math macro and numbers
@@ -46,34 +42,30 @@
 
 % use \num{123456} -> 123,456
 \sisetup{group-separator={,},group-minimum-digits={3},output-decimal-marker={.}}
-% 
+%
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \cfoot{\thepage}
-% Define bar chart colors
-%
+% Define Colors
 \definecolor{bblue}{HTML}{4F81BD}
 \definecolor{rred}{HTML}{C0504D}
 \definecolor{ggreen}{HTML}{9BBB59}
 \definecolor{ppurple}{HTML}{9F4C7C}
-
-\newcommand\inlineeqno{\stepcounter{equation}\ (\theequation)}
-%% \algtext*{Function} %Remove ``end while'' text
-%% \algtext*{EndWhile} %Remove ``end while'' text
-%% \algtext*{EndIf} %Remove ``end if'' text
-%% \algtext*{EndFor} %Remove ``end for'' text
-%% \algtext*{EndFunction} %Remove ``end function'' text
-
 \definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{gray}{RGB}{136,136,136}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{comment-red}{rgb}{0.8,0,0}
+% Macros
+\newcommand\inlineeqno{\stepcounter{equation}\ (\theequation)}
 \newcommand\mycommfont[1]{\footnotesize\ttfamily{\scriptsize \texttt{#1}}}
 \SetCommentSty{mycommfont}
-
 \renewcommand{\rothead}[2][60]{\makebox[9mm][c]{\rotatebox{#1}{\makecell[c]{#2}}}}
 \makeatletter
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
 \makeatother
-
 %%% Meta MA
 \newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
 \newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
@@ -83,111 +75,23 @@
 \newcommand{\Space}[1]{}
 \newcommand{\NA}{-}
 \newcommand{\Fix}[1]{\textcolor{red}{#1}}
-
-\DeclareFixedFont{\titlefont}{T1}{ppl}{b}{it}{0.3in}
-\newcommand{\BIEntry}[1]{\noindent\textbf{\textit{#1}}}
-\definecolor{gray}{RGB}{136,136,136}
-\newcommand{\TTitle}[1]{\textbf{#1}}
-\newcommand{\TTitleMath}[1]{$\bm{#1}$}
-%\newcommand{\TDeEmph}[1]{\textcolor{gray}{#1}}
-\newcommand{\MoreThanOne}[1]{\textcolor{BrickRed}{#1}}
 \newcommand{\Bullet}{$\star$}
-\newcommand{\Plan}[1]{\textcolor{blue}{#1}}
-\newcommand{\ClassLevelMark}{$^c$}
-\newcommand{\ClassLoaderMark}{$^l$}
-\newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
-\newcommand{\Contri}[1]{\noindent\textbf{#1}}
-%%%
-
-%%% Tables
-% ----------
-% THIS BELOW COPIED FROM vkuncak/doc/vmcai09/defs.tex
-\definecolor{gray}{RGB}{211,211,211}
-\newcommand{\jbasicstyle}{\scriptsize\sffamily}
-\newcommand{\textcode}[1]{{#1}}
-\newcommand{\jnumberstyle}{\tiny}
-\newcommand{\Hilight}{\makebox[0pt][l]{\color{gray}\rule[-3pt]{0.80\linewidth}{9pt}}}
-\lstdefinelanguage{pseudo}{
-  morekeywords={if,else,return,map},
-  keywordstyle=\bfseries,
-  lineskip=-0.1em,
-  numbers=none,
-  numberstyle=\jnumberstyle,
-  numbersep=4pt,
-  basicstyle=\scriptsize,
-  basicstyle=\jbasicstyle,
-  breaklines=true,
-  breakautoindent=true,
-  tabsize=2,
-  columns=fullflexible,
-  morecomment=*[l][\textsl]{//},
-  mathescape=true,
-}
-
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\lstset{frame=tb,
-  language=Java,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
-}
-% Define block styles
-\tikzstyle{decision} = [diamond, draw, 
-    text width=5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, 
-    text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\definecolor{comment-red}{rgb}{0.8,0,0}
-\newcommand{\textred}[1]{\textcolor{comment-red}{#1}}
-\newcommand{\pgwrapper}[2]{\textred{#1: #2}}
 \newcommand{\TODO}[1]{\pgwrapper{TODO}{#1}}
 \makeatletter
 \newcommand{\labitem}[2]{%
 \def\@itemlabel{\textbf{#1}}
 \item
 \def\@currentlabel{#1}\label{#2}}
-\makeatother
-\ifcsdef{sectionautorefname}{%
-  \renewcommand{\sectionautorefname}{\S}
-  \renewcommand{\subsectionautorefname}{\S}
-}{%
-  \providecommand{\sectionautorefname}{\S}
-  \providecommand{\subsectionautorefname}{\S}
-}
+
 \newcommand{\RN}[1]{%
   \textup{\uppercase\expandafter{\romannumeral#1}}%
 }
 \SetKwProg{Fn}{Function}{}{}
-
-% sema
+% MATH
 \newcommand{\shl}{\ \cc{<}\cc{<}\ }
 \newcommand{\shr}{\ \cc{>}\cc{>}\ }
 \newcommand{\x}{$\times$\xspace}
-
-% include macros
-\newcommand{\includepdf}[1]{
-  \includegraphics[width=\columnwidth]{#1}
-}
-\newcommand{\includeplot}[1]{
-  \resizebox{\columnwidth}{!}{\input{#1}}
-}
-
 % list
 \newcommand{\squishlist}{
 \begin{itemize}[noitemsep,nolistsep]
@@ -206,34 +110,28 @@
 \begin{tikzpicture}[baseline=(C.base)]
 \node[draw,circle,inner sep=0.2pt](C) {#1};
 \end{tikzpicture}}
-
 \newcommand*\BC[1]{%
 \begin{tikzpicture}[baseline=(C.base)]
 \node[draw,circle,fill=black,inner sep=0.2pt](C) {\textcolor{white}{#1}};
 \end{tikzpicture}
 }
-
 \newcommand{\PP}[1]{
 \vspace{2px}
 \noindent{\bf \IfEndWith{#1}{.}{#1}{#1.}}
 }
+\renewcommand{\paragraph}[1]{\smallskip\noindent\emph{#1}\quad}
 
-\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \newcommand{\V}{\checkmark}
 \newcommand{\X}{{\footnotesize $\times$}\xspace}
 \renewcommand{\O}{\phantom{0}}
-
 \newcommand{\etal}{\textit{et al}.\xspace}
 \newcommand{\ie}{\textit{i}.\textit{e}.}
 \newcommand{\eg}{\textit{e}.\textit{g}.}
 \newcommand{\URL}{\url}
-\renewcommand{\paragraph}[1]{\smallskip\noindent\emph{#1}\quad}
-%%%%%%%%%%%%%%%% Custom Macros For Paper  %%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%% Custom Macros For Paper  %%%%%%%%%%%%%%%%
 \newcommand{\bates}[1]{\textcolor{blue}{#1}}
-\newcommand{\moyer}[1]{\textcolor{orange}{TMM: #1}}
-%% \newcommand{\Sys}{{\text{\small \textsc{ProvDocker}}}\xspace}
-\newcommand{\Sys}{ProvDocker\xspace}
-\newcommand{\sys}{\mbox{\textsc{ProvDocker}}\xspace}
-\newcommand{\Cost}{98\%\xspace}
+\newcommand{\Sys}{XXX\xspace}
+\newcommand{\sys}{\mbox{\textsc{XXX}}\xspace}
+\newcommand{\Cost}{XXX\%\xspace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
