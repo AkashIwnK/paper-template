@@ -1,53 +1,31 @@
-MAIN ?= main
-DIFF ?= HEAD^
-DEPS := abstract.txt
-LTEX := --latex-args="-shell-escape"
-BTEX := --bibtex-args="-min-crossrefs=99"
-SHELL:= $(shell echo $$SHELL)
+# "Improved" Makefile for LaTeX documents
+# INTPUFILE This defines the name of the file you want to latex
+# the make file will automatically look for INPUT.tex as the latex file
+INPUTFILE=main
 
-all: $(DEPS) ## generate a pdf
-	@TEXINPUTS="sty:" bin/latexrun $(LTEX) $(BTEX) $(MAIN)
+default:
+	latexmk -pdf ${INPUTFILE}
+	@echo '****************************************************************'
+	@echo '******** Did you spell-check the paper? ********'
+	@echo '****************************************************************'
 
-submit: $(DEPS) ## proposal function
-	@for f in $(wildcard submit-*.tex); do \
-		TEXINPUTS="sty:" bin/latexrun $$f; \
-	done
+clean:
+	latexmk -c ${INPUTFILE}
+	rm -f ${INPUTFILE}.bbl
 
-diff: $(DEPS) ## generate diff-highlighed pdf
-	@bin/diff.sh $(DIFF)
+allclean:
+	latexmk -C ${INPUTFILE}
+	rm -f ${INPUTFILE}.bbl
 
-help: ## print help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-	  | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
+monitor:
+	latexmk -pdf -pvc ${INPUTFILE}
 
-rev.tex: FORCE
-	@printf '\\gdef\\therev{%s}\n\\gdef\\thedate{%s}\n' \
-	   "$(shell git rev-parse --short HEAD)"            \
-	   "$(shell git log -1 --format='%ci' HEAD)" > $@
+cleaner: allclean
 
-draft: $(DEPS) ## generate pdf with a draft info
-	echo -e '\\newcommand*{\\DRAFT}{}' >> rev.tex
-	@TEXINPUTS="sty:" bin/latexrun $(BTEX) $(MAIN)
+view: ${INPUTFILE}.pdf
+	open ${INPUTFILE}.pdf
 
-watermark: $(DEPS) ## generate pdf with a watermark
-	echo -e '\\usepackage[firstpage]{draftwatermark}' >> rev.tex
-	@TEXINPUTS="sty:" bin/latexrun $(BTEX) $(MAIN)
+${INPUTFILE}.pdf: default
 
-spell: ## run a spell check
-	@for i in *.tex fig/*.tex; do bin/aspell.sh $$i; done
-	@for i in *.tex; do bin/double.pl $$i; done
-	@for i in *.tex; do bin/abbrv.pl  $$i; done
-	@bin/hyphens.sh *.tex
-	@pdftotext $(MAIN).pdf /dev/stdout | grep '??'
-
-clean: ## clean up
-	@bin/latexrun --clean
-	rm -f abstract.txt
-
-distclean: clean ## clean up completely
-	rm -f code/*.tex
-
-abstract.txt: abstract.tex $(MAIN).tex ## generate abstract.txt
-	@bin/mkabstract $(MAIN).tex $< | fmt -w72 > $@
-
-.PHONY: all help FORCE draft clean spell distclean init
+count:
+	texcount -brief *.tex
